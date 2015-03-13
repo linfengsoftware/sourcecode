@@ -67,7 +67,7 @@ public class DeptService {
     }
     
     public List<Dept> getAllDepts(){
-    	List<Dept> deptList = new ArrayList();
+    	List<Dept> deptList = new ArrayList<Dept>();
     	deptList = (List<Dept>)deptDao.findAll();
     	return deptList;
     }
