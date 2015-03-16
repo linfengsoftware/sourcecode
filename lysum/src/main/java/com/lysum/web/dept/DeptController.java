@@ -39,7 +39,7 @@ import com.lysum.service.dept.DeptService;
 @RequestMapping(value = "/dept")
 public class DeptController {
 
-	private static final int PAGE_SIZE = 3;
+	private static final int PAGE_SIZE = 10;
 
 	private static Map<String, String> sortTypes = Maps.newLinkedHashMap();
 	static {

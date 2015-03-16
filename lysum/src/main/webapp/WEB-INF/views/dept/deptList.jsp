@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-
 <html>
 <head>
 	<title>部门管理</title>
@@ -27,13 +26,24 @@
 		<c:forEach items="${depts.content}" var="dept">
 			<tr>
 				<td><a href="${ctx}/dept/update/${dept.id}">${dept.deptName}</a></td>
-				<td><a href="${ctx}/dept/delete/${dept.id}">删除</a></td>
+						<c:choose>
+							<c:when test="${dept.id == 0 }">
+								<td>
+									<span style="cursor: hander;" onclick="javascript:return alert('不能删除！！')">删除</span>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+									<a href="${ctx}/dept/delete/${dept.id}">删除</a>
+								</td>
+							</c:otherwise>
+						</c:choose>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
 	
-	<tags:pagination page="${depts}" paginationSize="5"/>
+	<tags:pagination page="${depts}" paginationSize="10"/>
 
 	<div><a class="btn" href="${ctx}/dept/create">创建部门</a></div>
 </body>
