@@ -54,6 +54,13 @@
 
 	<!-- JSR303 Validator定义 -->
  	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+ 	
+ 	<!-- multipartResovler -->
+ 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		 <!-- setting maximum upload size 
+		<property name="maxUploadSize" value="100000" />
+		-->
+	</bean>
 	
 	<!-- production环境 -->
  	<beans profile="production">
@@ -96,6 +103,8 @@
 			<property name="defaultAutoCommit" value="false" />
 		</bean>
 	</beans>
+	
+
 	
 	<beans profile="functional">
 		<context:property-placeholder ignore-resource-not-found="true"

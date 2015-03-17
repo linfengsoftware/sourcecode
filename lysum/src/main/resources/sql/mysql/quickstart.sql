@@ -86,6 +86,17 @@ CREATE TABLE `smuser` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+CREATE TABLE `smfile` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `file_name` varchar(32) DEFAULT NULL,
+  `upload_time` datetime DEFAULT NULL,
+  `file_path` varchar(32) DEFAULT NULL,
+  `orginal_name` varchar(32) DEFAULT NULL,
+  `remark` varchar(32) DEFAULT NULL,
+  `size` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 PACK_KEYS=0;
 --
 -- Dumping data for table `smuser`
 --

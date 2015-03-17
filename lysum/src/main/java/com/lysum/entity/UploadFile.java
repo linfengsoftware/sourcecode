@@ -1,19 +1,25 @@
 package com.lysum.entity;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "sm_file")
-public class File extends IdEntity{
+public class UploadFile extends IdEntity{
 	
 	private String fileName ;
 	
 	private String filePath ;
 	
 	private Date uploadTime;
+	
+	private Long size ;
+	
+	private String orginalName;
+	
+	private String remark ;
 	
 	public String getFileName() {
 		return fileName;
@@ -37,6 +43,30 @@ public class File extends IdEntity{
 	
 	public void setUploadTime(Date uploadTime) {
 		this.uploadTime = uploadTime;
+	}
+
+	public Long getSize() {
+		return size;
+	}
+
+	public void setSize(Long size) {
+		this.size = size;
+	}
+
+	public String getOrginalName() {
+		return orginalName;
+	}
+
+	public void setOrginalName(String orginalName) {
+		this.orginalName = orginalName;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 	

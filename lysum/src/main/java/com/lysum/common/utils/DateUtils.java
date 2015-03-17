@@ -1,4 +1,4 @@
-package com.lysum.common;
+package com.lysum.common.utils;
 
 import java.sql.Timestamp;
 import java.text.ParseException;

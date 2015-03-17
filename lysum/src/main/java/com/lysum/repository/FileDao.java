@@ -5,11 +5,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.lysum.entity.Dept;
 
-public interface DeptDao extends PagingAndSortingRepository<Dept, Long>,
-		JpaSpecificationExecutor<Dept> {
+import com.lysum.entity.UploadFile;
 
-	Page<Dept> findByDeptName(String deptName, Pageable pageRequest);
 
+public interface FileDao extends  PagingAndSortingRepository<UploadFile, Long>,
+JpaSpecificationExecutor<UploadFile> {
+	
+	Page<UploadFile> findByFileName(String fileName, Pageable pageRequest);
+	
+	
 }

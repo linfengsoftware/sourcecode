@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import com.lysum.entity.Task;
 
-public interface TaskDao extends PagingAndSortingRepository<Task, Long>, JpaSpecificationExecutor<Task> {
+public interface TaskDao extends PagingAndSortingRepository<Task, Long>,
+		JpaSpecificationExecutor<Task> {
 
 	Page<Task> findByUserId(Long id, Pageable pageRequest);
 
