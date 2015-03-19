@@ -5,7 +5,7 @@
 
 <html>
 <head>
-	<title>用户管理</title>
+	<title>文件管理</title>
 	
 	<script>
 		$(document).ready(function() {
@@ -34,12 +34,16 @@
 					<input type="file" name="file" class="input-large"  />
 				</div>
 			</div>
-			<div class="control-group">
+			<c:if test="${file.id}!=null">
+			     <div class="control-group">
 				<label class="control-label">注册日期:</label>
 				<div class="controls">
-					<span class="help-inline" style="padding:5px 0px"><fmt:formatDate value="${file.uploadDate}" pattern="yyyy年MM月dd日  HH时mm分ss秒" /></span>
+					<span class="help-inline" style="padding:5px 0px">
+					     <fmt:formatDate value="${file.uploadDate}" pattern="yyyy年MM月dd日  HH时mm分ss秒" />
+					</span>
 				</div>
 			</div>
+			</c:if>
 			<div class="control-group">
 				<label class="control-label">描述:</label>
 				<div class="controls">

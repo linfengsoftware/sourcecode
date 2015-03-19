@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "sm_file")
+@Table(name = "smfile")
 public class UploadFile extends IdEntity{
 	
 	private String fileName ;

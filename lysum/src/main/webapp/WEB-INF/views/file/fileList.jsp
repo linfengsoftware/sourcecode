@@ -14,7 +14,7 @@
 	<div class="row">
 		<div class="span4 offset7">
 			<form class="form-search" action="#">
-			 	<label>文件名称：</label> <input type="text" name="search_LIKE_fileName" class="input-medium" value="${param.search_LIKE_fileName}"> 
+			 	<label>名称：</label> <input type="text" name="search_LIKE_fileName" class="input-medium" value="${param.search_LIKE_fileName}"> 
 			    <button type="submit" class="btn">Search</button>
 		    </form>
 	    </div>
