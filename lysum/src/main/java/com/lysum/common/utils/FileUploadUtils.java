@@ -79,6 +79,7 @@ public class FileUploadUtils {
 	 * @throws FileSizeLimitExceededException 
 	 */
 	public static final UploadFile upload(HttpServletRequest request, MultipartFile file) throws FileSizeLimitExceededException, InvalidExtensionException, FileNameLengthLimitExceededException, MismatchExtensionException, IOException {
+		
 		return upload(request, getDefaultBaseDir(), true, file, DEFAULT_ALLOWED_EXTENSION);
 	}
 
@@ -164,10 +165,7 @@ public class FileUploadUtils {
 		String filename = extractFilename(file, baseDir, needDatePathAndRandomName);
 
 		File desc = getAbsoluteFile(extractUploadDir(request), filename);
-        
-		
 		file.transferTo(desc); // 将上传文件转存到指定目录的文件
-
 		String relativePath = StringUtil.replace(filename, File.separator, StringPool.FORWARD_SLASH);
 		//File uploadFile = new File( file.getOriginalFilename(),desc, relativePath);
 		UploadFile uploadFile = new UploadFile();
@@ -178,7 +176,7 @@ public class FileUploadUtils {
 			jobj.put("height", ImageUtils.getHeight(desc));
 			uploadFile.setRemark(jobj.toJSONString());
 		}else{//lyf add
-			uploadFile.setOrginalName(filename);
+			uploadFile.setOrginalName(originalFilename);
 			uploadFile.setFilePath(relativePath);
 			uploadFile.setSize(file.getSize());
 		}
@@ -318,7 +316,10 @@ public class FileUploadUtils {
 	 */
 	public static final String extractUploadDir(HttpServletRequest request) {
 		//return request.getServletContext().getRealPath("/");
-		return null ;
+		//request.getSession().get
+		System.out.println(request.getSession().getServletContext().getRealPath("/"));
+		return request.getSession().getServletContext().getRealPath("/");
+		
 		
 	}
 

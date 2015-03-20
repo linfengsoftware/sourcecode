@@ -70,13 +70,15 @@ public class FileController{
 		return "file/single";
 	}
 	
+	
 	@RequestMapping(value = "create",method = RequestMethod.POST)
-	public String create(@Valid UploadFile uploadFile ,@RequestParam MultipartFile[] myfiles, HttpServletRequest request,RedirectAttributes redirectAttributes){
-		
-		System.out.println("in the create post!!!!");
+	public String create(@Valid UploadFile uploadFile ,@RequestParam MultipartFile[] upFiles, HttpServletRequest request,RedirectAttributes redirectAttributes){
+		boolean success = false ;
 		FileUploadUtils fileUploadUtils = new FileUploadUtils();
 		UploadFile tmpFile = new UploadFile();
-		for(MultipartFile file : myfiles){
+		String uploadPath = request.getSession().getServletContext().getRealPath("/static/upload");
+		System.out.println("uploadPath:"+uploadPath);
+		for(MultipartFile file : upFiles){
 			if(file.isEmpty()){
 				System.out.println("文件未上传");
 			}else{
@@ -86,17 +88,21 @@ public class FileController{
 					tmpFile.setRemark(uploadFile.getRemark());
 					tmpFile.setUploadTime(dateProvider.getDate());
 					fileService.saveFile(tmpFile);
+					success = true ;
 				}catch(Exception e){
+					success = false ;
 					e.printStackTrace();
+					
 				}
 			}
-			
 		}
-		redirectAttributes.addFlashAttribute("message", "上传文件成功");
+		if(success = false){
+			redirectAttributes.addFlashAttribute("message", "上传文件失败");
+		}else{
+			redirectAttributes.addFlashAttribute("message", "上传文件成功");
+		}
 		return "redirect:/file/";
-		
 	}
-
 
 
 	public void setDateProvider(DateProvider dateProvider) {

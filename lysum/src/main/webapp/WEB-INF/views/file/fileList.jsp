@@ -26,7 +26,7 @@
 		<c:forEach items="${files.content}" var="file">
 			<tr>
 				<td><a href="${ctx}/file/update/${file.id}">${file.fileName}</a></td>
-				<td><a href="${ctx}/file/delete/${file.id}">"删除</a></td>
+				<td><a href="${ctx}/file/delete/${file.id}">删除</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>
