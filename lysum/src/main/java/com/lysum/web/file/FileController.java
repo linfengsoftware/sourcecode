@@ -3,6 +3,8 @@ package com.lysum.web.file;
 import java.util.Map;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,9 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springside.modules.utils.DateProvider;
 import org.springside.modules.web.Servlets;
 
 import com.google.common.collect.Maps;
+import com.lysum.common.utils.DateUtils;
+import com.lysum.common.utils.FileUploadUtils;
 import com.lysum.entity.UploadFile;
 import com.lysum.service.file.FileService;
 
@@ -43,6 +50,8 @@ public class FileController{
 	@Autowired
 	public FileService fileService ;
 	
+	private DateProvider dateProvider = DateProvider.DEFAULT;
+	
 	@RequestMapping(value="")
 	public String list(@RequestParam(value = "sortType", defaultValue = "auto") String sortType,
 			@RequestParam(value = "page", defaultValue = "1") int pageNumber, Model model, ServletRequest request){
@@ -57,8 +66,41 @@ public class FileController{
 	
 	@RequestMapping(value="create",method=RequestMethod.GET)
 	public String createForm(Model model){
+		model.addAttribute("action", "create");
 		return "file/single";
 	}
 	
+	@RequestMapping(value = "create",method = RequestMethod.POST)
+	public String create(@Valid UploadFile uploadFile ,@RequestParam MultipartFile[] myfiles, HttpServletRequest request,RedirectAttributes redirectAttributes){
+		
+		System.out.println("in the create post!!!!");
+		FileUploadUtils fileUploadUtils = new FileUploadUtils();
+		UploadFile tmpFile = new UploadFile();
+		for(MultipartFile file : myfiles){
+			if(file.isEmpty()){
+				System.out.println("文件未上传");
+			}else{
+				try{
+					tmpFile = fileUploadUtils.upload(request, file);
+					tmpFile.setFileName(uploadFile.getFileName());
+					tmpFile.setRemark(uploadFile.getRemark());
+					tmpFile.setUploadTime(dateProvider.getDate());
+					fileService.saveFile(tmpFile);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		redirectAttributes.addFlashAttribute("message", "上传文件成功");
+		return "redirect:/file/";
+		
+	}
+
+
+
+	public void setDateProvider(DateProvider dateProvider) {
+		this.dateProvider = dateProvider;
+	}
 	
 }

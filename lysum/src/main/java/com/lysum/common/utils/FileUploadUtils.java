@@ -171,11 +171,16 @@ public class FileUploadUtils {
 		String relativePath = StringUtil.replace(filename, File.separator, StringPool.FORWARD_SLASH);
 		//File uploadFile = new File( file.getOriginalFilename(),desc, relativePath);
 		UploadFile uploadFile = new UploadFile();
+		
 		if(ImageUtils.isImage(filename)){		//图片文件保存图片的宽高到备注中，用json格式
 			JSONObject jobj = new JSONObject();
 			jobj.put("width", ImageUtils.getWidth(desc));
 			jobj.put("height", ImageUtils.getHeight(desc));
 			uploadFile.setRemark(jobj.toJSONString());
+		}else{//lyf add
+			uploadFile.setOrginalName(filename);
+			uploadFile.setFilePath(relativePath);
+			uploadFile.setSize(file.getSize());
 		}
 		
 		return uploadFile;

@@ -31,7 +31,7 @@
 			<div class="control-group">
 				<label class="control-label">文件</label>
 				<div class="controls">
-					<input type="file" name="file" class="input-large"  />
+					<input type="file" name="upFiles" class="input-large"  />
 				</div>
 			</div>
 			<c:if test="${file.id}!=null">
