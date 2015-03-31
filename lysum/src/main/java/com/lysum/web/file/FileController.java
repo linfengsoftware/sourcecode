@@ -76,8 +76,6 @@ public class FileController{
 		boolean success = false ;
 		FileUploadUtils fileUploadUtils = new FileUploadUtils();
 		UploadFile tmpFile = new UploadFile();
-		String uploadPath = request.getSession().getServletContext().getRealPath("/static/upload");
-		System.out.println("uploadPath:"+uploadPath);
 		for(MultipartFile file : upFiles){
 			if(file.isEmpty()){
 				System.out.println("文件未上传");
@@ -92,7 +90,6 @@ public class FileController{
 				}catch(Exception e){
 					success = false ;
 					e.printStackTrace();
-					
 				}
 			}
 		}

@@ -160,10 +160,8 @@ public class FileUploadUtils {
 		if (!extensions.contains("."+StringUtils.lowerCase(extension))) {
 			throw new MismatchExtensionException(contentType, extension, originalFilename);
 		}
-
 		assertAllowed(file, allowedExtension, maxSize); // 判断是否允许文件上传
 		String filename = extractFilename(file, baseDir, needDatePathAndRandomName);
-
 		File desc = getAbsoluteFile(extractUploadDir(request), filename);
 		file.transferTo(desc); // 将上传文件转存到指定目录的文件
 		String relativePath = StringUtil.replace(filename, File.separator, StringPool.FORWARD_SLASH);
@@ -218,7 +216,6 @@ public class FileUploadUtils {
 	 */
 	public static final String extractFilename(MultipartFile file, String baseDir, boolean needDatePathAndRandomName)
 			throws UnsupportedEncodingException {
-
 		String filename = file.getOriginalFilename();
 		int slashIndex = filename.indexOf("/");
 		if (slashIndex >= 0) {
@@ -315,12 +312,7 @@ public class FileUploadUtils {
 	 * @return
 	 */
 	public static final String extractUploadDir(HttpServletRequest request) {
-		//return request.getServletContext().getRealPath("/");
-		//request.getSession().get
-		System.out.println(request.getSession().getServletContext().getRealPath("/"));
 		return request.getSession().getServletContext().getRealPath("/");
-		
-		
 	}
 
 	/**
